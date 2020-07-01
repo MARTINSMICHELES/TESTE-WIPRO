@@ -20,19 +20,9 @@ namespace Locadora
             {
                 con = new SqlConnection(conString);
                 Cmd.Connection = con;
-                Cmd.CommandTimeout = 0;//tempo para conexão local
-                try
-                {
-                    con.Open();
-                }
-                catch (Exception)
-                {
-                    try
-                    {
-                        AbreConexao(conString);
-                    }
-                    catch (Exception ex) { throw new Exception("Conexao(): " + ex.Message); }
-                }
+                Cmd.CommandTimeout = 15;//tempo para conexão local
+                try { con.Open(); }
+                catch (Exception ex) { throw new Exception($"Falha ao Conectar ao Banco de dados: {ex.Message}"); }
             }
         }
 
